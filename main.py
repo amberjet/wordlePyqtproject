@@ -3,34 +3,52 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
+with open('files/words.txt') as f:
+    lines = [x.strip() for x in f.readlines()]
+
+LINES = lines
+
 
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('files/wordle.ui', self)
-        self.run()
+        self.b1 = [self.pushButton, self.pushButton_2, self.pushButton_3, self.pushButton_4, self.pushButton_5]
+        self.count = 0
+        self.flag = False
+        self.readyButton.clicked.connect(self.run)
+        self.today_word = random.choice(LINES).strip()
+        print(self.today_word)
 
     def run(self):
-        pass
+        if self.count < 5 and not self.flag:
+            guess = self.lineEdit.text()
+            if len(guess) != 5 or guess not in LINES:
+                print('слова нет в словаре')
+            elif guess == self.today_word:
+                self.flag = True
+                print('вы угадали!')
+            else:
+                result, right_symbol = suspicion(self.today_word, guess)
+                self.write_word(result)
+                print(result)
+                if len(right_symbol) > 0:
+                    print('Кроме того, в слове есть буквы:', *right_symbol)
+            self.count += 1
+            self.lineEdit.clear()
 
-
-def main():
-    with open('files/words.txt') as f:
-        lines = [x.strip() for x in f.readlines()]
-    today_word = random.choice(lines).strip()
-    print(today_word)
-    for _ in range(5):
-        guess = input('Введите слово из 5 букв: ')
-        if len(guess) != 5 or guess not in lines:
-            continue
-        if guess == today_word:
-            print('вы угадали!')
-            break
         else:
-            result, right_symbol = suspicion(today_word, guess)
-            print(result)
-            if len(right_symbol) > 0:
-                print('Кроме того, в слове есть буквы:', *right_symbol)
+            print('вы исчерпали попытки')
+
+    def write_word(self, res):
+        if self.count == 0 or self.count == 1:
+            target_group = self.b1
+            print(self.count)
+            print(target_group)
+            for i in range(len(target_group)):
+                if res[i] != '_':
+                    target_group[i].setStyleSheet('background: rgb(0,200,0);')
+                    target_group[i].setText(res[i])
 
 
 def suspicion(today_word, guess):

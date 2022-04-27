@@ -363,7 +363,7 @@ guest
 guide
 guilt
 guise
-Gypsy
+gypsy
 habit
 halve
 handy
@@ -416,6 +416,7 @@ ledge
 legal
 level
 lever
+light
 limit
 linen
 liver
@@ -554,6 +555,7 @@ rifle
 rigid
 rinse
 rival
+river
 rivet
 roast
 rogue
@@ -659,6 +661,7 @@ spike
 spill
 spine
 spoil
+sport
 squad
 squat
 squid
@@ -674,6 +677,7 @@ stamp
 stand
 stare
 stark
+start
 stash
 state
 steam
