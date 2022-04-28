@@ -11,7 +11,7 @@ def main():
         if len(guess) < 5 or guess not in lines:
             continue
         if guess == today_word:
-            print('вы угадали!')
+            print('Вы угадали!')
             break
         else:
             result, right_symbol = suspicion(today_word, guess)
