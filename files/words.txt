@@ -510,6 +510,7 @@ poise
 porch
 pouch
 pound
+power
 press
 prick
 pride
@@ -691,6 +692,7 @@ stiff
 still
 stock
 stomp
+stone
 stool
 stoop
 store

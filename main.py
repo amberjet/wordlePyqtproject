@@ -6,7 +6,6 @@ from PyQt5.QtCore import Qt
 
 with open('files/words.txt') as f:
     lines = [x.strip() for x in f.readlines()]
-
 LINES = lines
 
 
@@ -27,7 +26,9 @@ class MyWidget(QMainWindow):
         self.kguess = ''
 
     def run(self):
-        if self.count < 5 and not self.flag:
+        if self.flag:
+            return
+        if self.count < 5:
             guess = self.lineEdit.text()
             if len(guess) != 5 or guess not in LINES:
                 print('слова нет в словаре')
@@ -60,6 +61,8 @@ class MyWidget(QMainWindow):
                 right_symbol.remove(target_group[i].text())
 
     def keyReleaseEvent(self, event):
+        if self.flag:
+            return
         if event.text() != '':
             self.kguess = self.lineEdit.text()
         if self.count == 0:
@@ -82,6 +85,7 @@ class MyWidget(QMainWindow):
         true_symbol = []
         if guess == self.today_word:
             self.flag = True
+            # тут еще хорошо бы вообще отключить поле для ввода
             return guess, true_symbol
         res = ''
         for i in range(5):
