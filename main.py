@@ -30,7 +30,8 @@ class MyWidget(QMainWindow):
             return
         if self.count < 5:
             guess = self.lineEdit.text()
-            if len(guess) != 5 or guess not in LINES:
+
+            if guess not in LINES:
                 print('слова нет в словаре')
             else:
                 result, right_symbol = self.suspicion(guess)
@@ -38,7 +39,6 @@ class MyWidget(QMainWindow):
 
                 self.count += 1
             self.lineEdit.clear()
-
         else:
             print('вы исчерпали попытки')
 
